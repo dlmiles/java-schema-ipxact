@@ -76,7 +76,38 @@ jobs:
           echo "snapshotVersion=$snapshotVersion" >> $GITHUB_ENV
           echo "isSnapshot=$isSnapshot" >> $GITHUB_ENV
 
-        # Resolve external dependecies (this will validate org.darrylmiles.forked.org.unbroken-dome.xjc is accessible)
+        #
+      - name: Gradle - Version based module exclusions
+        run: |
+          GRADLE_VERSION=$(./gradlew --version | grep "^Gradle " | sed -e 's/^Gradle //')
+          echo "GRADLE_VERSION=$GRADLE_VERSION"
+          echo "GRADLE_VERSION=$GRADLE_VERSION" >> $GITHUB_ENV
+
+          GRADLE_VERSION_MAJOR_MINOR=$(echo -n "$GRADLE_VERSION" | cut -d'.' -f1-2)
+          echo "GRADLE_VERSION_MAJOR_MINOR=$GRADLE_VERSION_MAJOR_MINOR"
+          echo "GRADLE_VERSION_MAJOR_MINOR=$GRADLE_VERSION_MAJOR_MINOR" >> $GITHUB_ENV
+
+          # Axis1 support is not that important so if we are using Gradle 8.12+ then Axis1 modules
+          #  need to be excluded due to gradle WSDL plugin not being supported.
+          GRADLE_VERSION_IS_ATLEAST_8_12=false
+          if echo "$GRADLE_VERSION" | grep -E -q "^(8\.1[2-9]|9\.|1[0-9]\.)" # 8.12+ 9+ .. 19*
+          then
+            GRADLE_VERSION_IS_ATLEAST_8_12=true
+            GRADLE_CLI_EXCLUDE_TASK="spirit-1685-2009-wsdl-axis1 spirit-1_4-wsdl-axis1 spirit-1_5-wsdl-axis1"
+            echo "GRADLE_CLI_EXCLUDE_TASK=$GRADLE_CLI_EXCLUDE_TASK" >> $GITHUB_ENV
+
+            # Comment out these modules
+            sed -e "s#^include '.*-wsdl-axis1'#//\\0#" < settings.gradle > settings.gradle.new
+            mv -f settings.gradle settings.gradle.orig
+            echo "### diff -u settings.gradle.orig settings.gradle.new :"
+            diff -u settings.gradle.orig settings.gradle.new
+            cp -f settings.gradle.new settings.gradle
+          fi
+          echo "GRADLE_VERSION_IS_ATLEAST_8_12=$GRADLE_VERSION_IS_ATLEAST_8_12" >> $GITHUB_ENV
+          echo "### settings.gradle :"
+          grep "^include " settings.gradle
+
+        # Resolve external dependencies (this will validate org.darrylmiles.forked.org.unbroken-dome.xjc is accessible)
       - name: Gradle - refresh-dependencies
         env:
           GITHUB_USERNAME: ${{ github.actor }}

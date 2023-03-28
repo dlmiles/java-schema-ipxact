@@ -225,7 +225,7 @@ are licensed under the MIT license.
 This project contains copyrighted works that are the owned by Accellera&trade; System Initiative.
 This project contains components that are redistributed under the terms of the XMLSchema licensing
 by Accellera&trade; System Initiative copies of the terms can be found:
- * online at http://www.accellerca.org/XMLSchema/ 
+ * online at http://www.accellera.org/XMLSchema/ 
  * in the text at the top of the individual XSD, WSDL, XML and HTML <br/>
       files owned by Accellera&trade; System Initiative
  * in a LICENSE files located in this project around **/src/main/schema/LICENSE
