@@ -207,7 +207,7 @@ jobs:
           tar -zcf dist/artifacts.tar.gz -C dist/content .
 
       - name: Upload - perform
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
           name: java-schema-ipxact-maven2-jaxb${{ matrix.jaxb }}-artifacts
@@ -226,19 +226,19 @@ jobs:
 
       # java-schema-ipxact-maven-m2-artifacts-jaxb${{ matrix.jaxb }}${{ env.dash_buildid }}${{ env.dash_buildyyyymmdd }}${{ env.dash_githash }}
       - name: Download - java-schema-ipxact-maven2-jaxb2.2-artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: java-schema-ipxact-maven2-jaxb2.2-artifacts
           path: build/java-jaxb2.2-artifacts/
 
       - name: Download - java-schema-ipxact-maven2-jaxb2.3-artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: java-schema-ipxact-maven2-jaxb2.3-artifacts
           path: build/java-jaxb2.3-artifacts/
 
       - name: Download - java-schema-ipxact-maven2-jaxb3.0-artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: java-schema-ipxact-maven2-jaxb3.0-artifacts
           path: build/java-jaxb3.0-artifacts/
