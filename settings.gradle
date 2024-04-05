@@ -10,15 +10,23 @@ pluginManagement {
     repositories {
         // 3rd party releases and SNAPSHOTs
         maven {
-            url "https://dlmiles.github.io/gradle-xjc-plugin/java8/maven2"
-	    // url "https://maven.pkg.github.com/dlmiles/gradle-xjc-plugin"
+            //url "https://dlmiles.github.io/gradle-xjc-plugin/java8/maven2"
+	    url = "https://maven.pkg.github.com/dlmiles/gradle-xjc-plugin"
             content {
                 // this repository *only* contains artifacts for specific groups
                 includeGroup "org.unbroken-dome.xjc"
-                includeGroup "org.unbroken-dome.gradle-plugins"
+                includeGroup "org.unbroken-dome"
 
                 includeGroup "io.github.dlmiles.xjc"
-                includeGroup "io.github.dlmiles.gradle-plugins"
+                includeGroup "io.github.dlmiles"
+
+                includeGroup "org.darrylmiles.forked.org.unbroken-dome.xjc"
+                includeGroup "org.darrylmiles.forked.org.unbroken-dome"
+            }
+            credentials {
+                // github requires any valid credentials even to GET packages
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
 
