@@ -24,7 +24,8 @@ jobs:
       - name: Publish package
         run: ./gradlew -PpublishMode=remote "-DreleasesRepoUrl=${{ env.MAVEN_REPO_URL }}" publish
         env:
-          MAVEN_REPO_URL: 'https://maven.pkg.github.com/dlmiles/java-schema-ipxact'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          GITHUB_USERNAME: ${{ github.actor }}
+          GITHUB_TOKEN:    ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_REPO_URL:  'https://maven.pkg.github.com/dlmiles/java-schema-ipxact'
+          MAVEN_USERNAME:  ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD:  ${{ secrets.OSSRH_PASSWORD }}

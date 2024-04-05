@@ -76,6 +76,13 @@ jobs:
           echo "snapshotVersion=$snapshotVersion" >> $GITHUB_ENV
           echo "isSnapshot=$isSnapshot" >> $GITHUB_ENV
 
+        # Resolve external dependecies (this will validate org.darrylmiles.forked.org.unbroken-dome.xjc is accessible)
+      - name: Gradle - refresh-dependencies
+        env:
+          GITHUB_USERNAME: ${{ github.actor }}
+          GITHUB_TOKEN:    ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew --refresh-dependencies clean
+
       - name: Gradle - build
         run: ./gradlew build -Djavax.xml.accessExternalSchema=file,jar,jar:file,maven,classpath -Djavax.xml.accessExternalDTD=file,jar,jar:file,maven,classpath
 
