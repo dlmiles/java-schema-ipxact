@@ -47,7 +47,7 @@ dependencies {
     implementation project(':spirit-1685-2009') // "${group}:spirit-1685-2009:${projectVersion}"
 
     //xjcClasspath(project(':spirit-1685-2009'))
-    xjcEpisodes(configurations.compileClasspath)
+    configurations.compileClasspath.extendsFrom(configurations.xjcEpisodes)
 
     xjcCatalogResolution(project(':spirit-1685-2009')) {
         transitive = false
