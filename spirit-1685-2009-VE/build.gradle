@@ -46,6 +46,8 @@ dependencies {
     // Sibling project for catalog.cat use of classpath: XSD resolver
     implementation project(':spirit-1685-2009') // "${group}:spirit-1685-2009:${projectVersion}"
 
+    // See below the dependsOn() was added to ensure project build ordering,
+    // we need the output jar (or the sibling project) before we run xjcGenerate here
     //xjcClasspath(project(':spirit-1685-2009'))
     configurations.compileClasspath.extendsFrom(configurations.xjcEpisodes)
 
@@ -168,6 +170,9 @@ tasks.create("generateCatalog") {
     }
 }
 tasks.xjcGenerate.dependsOn("generateCatalog")        // perform last, just before xjcGenerate
+// TODO can we make this automatic, if we added to configurations classpath and it is the output from a target
+// within this gradle multi-project build we need to wait for the JAR to appear, before we start xjcGenerate.
+tasks.xjcGenerate.dependsOn(":spirit-1685-2009:jar")
 
 apply from: "${rootProject.projectDir}/publish.gradle"
 
