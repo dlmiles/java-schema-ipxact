@@ -207,7 +207,7 @@ jobs:
           tar -zcf dist/artifacts.tar.gz -C dist/content .
 
       - name: Upload - perform
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
           name: java-schema-ipxact-maven2-jaxb${{ matrix.jaxb }}-artifacts
