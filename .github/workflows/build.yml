@@ -23,7 +23,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: JVM Download
         env:
@@ -222,7 +222,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # java-schema-ipxact-maven-m2-artifacts-jaxb${{ matrix.jaxb }}${{ env.dash_buildid }}${{ env.dash_buildyyyymmdd }}${{ env.dash_githash }}
       - name: Download - java-schema-ipxact-maven2-jaxb2.2-artifacts
