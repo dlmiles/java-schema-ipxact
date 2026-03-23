@@ -52,7 +52,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Gradle - setup
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Gradle - gradle.properties
         shell: bash
