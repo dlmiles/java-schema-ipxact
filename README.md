@@ -216,6 +216,28 @@ This concerns the use of package level annotations.
 Upgrade to 11.0.18 or maybe downgrade to older versions should side-step this matter.
 
 
+### Gradle and Build JDK Compatibility
+
+See https://docs.gradle.org/current/userguide/compatibility.html
+
+Note we are still configured to generate JRE8 bytecode but eventually that
+support will be withdrawn from Build JREs as they advance forward at which
+time expect to build for trailing (oldest) supported bytecode level of Build
+JRE.  This rule maybe broken if the project makes use of feature in newer bytecode
+but that is unlikely.
+
+|Gradle Version|Build JDK|Notes|
+|7.3|JDK17|Oldest Gradle version with JDK17 support|
+|7.5.1|JDK17|Initial Version|
+|8.5|JDK21|First Gradle version with JDK21 support|
+|8.11.1|JDK21|Last supported Gradle with *-wsdl-axis1 project included|
+|vvv||See comment at bottom of settings.gradle to build all items below|
+|8.12|JDK21|Build OK (with *-wsdl-axis1 excluded)|
+|8.14.5|JDK21|Build OK (with *-wsdl-axis1 excluded)|
+|9.0.0|JDK21|NoClassDefFoundError: org/gradle/api/internal/HasConvention: org.unbrokendome.gradle.plugins.xjc.XjcPlugin$apply$3$1.execute(XjcPlugin.kt:111)|
+|9.1.0|JDK25|First Gradle version with JDK25 support - NoClassDefFoundError|
+|9.5.1|JDK26|First Gradle version with JDK26 support - NoClassDefDoundError|
+
 
 ### LEGALS
 

@@ -45,6 +45,7 @@ include 'spirit-1_5'
 include 'spirit-1685-2009'
 include 'spirit-1685-2009-VE'
 include 'ipxact-1685-2014'
+// When building for Gradle 8.12 or later, comment these *-wsdl-axis1 projects out
 include 'spirit-1_4-wsdl-axis1'
 include 'spirit-1_5-wsdl-axis1'
 include 'spirit-1685-2009-wsdl-axis1'
